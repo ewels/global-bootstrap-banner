@@ -10,7 +10,9 @@ Text Domain: bootstrap-banner
 License: GPLv2
 */
 
+//
 // Theme customiser
+//
 function bootstrap_banner_theme_customizer( $wp_customize ) {
 
     // Regeneration button custom control
@@ -63,8 +65,8 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
     ) );
 
     // Header text
-    $wp_customize->add_setting('bootstrap_banner[header]', array('type' => 'option'));
-    $wp_customize->add_control('bootstrap_banner[header]', array(
+    $wp_customize->add_setting('bootstrap_banner[header_text]', array('type' => 'option'));
+    $wp_customize->add_control('bootstrap_banner[header_text]', array(
         'type' => 'text',
         'label' => __('Header text'),
         'description' => __('Header for the alert (optional).'),
@@ -202,3 +204,65 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
 
 }
 add_action('customize_register', 'bootstrap_banner_theme_customizer');
+
+
+
+
+//
+// Banner shortcode
+//
+
+// Shortcode
+function bootstrap_banner_shortcode($atts_raw) {
+    $options = get_option('bootstrap_banner');
+    if(!$options || !$options['enabled']){
+        return;
+    }
+    $contents = '';
+    if($options['header_text'] && trim($options['header_text'])){
+        $contents .= '<h4 class="alert-heading">'.trim($options['header_text']).'</h4>';
+    }
+    if($options['body_text'] && trim($options['body_text'])){
+        $contents .= trim($options['body_text']);
+    }
+    if($options['link_text'] && trim($options['link_text']) && $options['link_url'] && trim($options['link_url'])){
+        $btn_classes = array('btn', 'mt-2');
+        if($options['link_class']){
+            $btn_classes[] = $options['link_class'];
+        } else {
+            $btn_classes[] = 'btn-primary';
+        }
+        if($options['link_btn_lg']){
+            $btn_classes[] = 'btn-lg';
+        }
+        if($options['link_btn_sm']){
+            $btn_classes[] = 'btn-sm';
+        }
+        if($options['link_btn_block']){
+            $btn_classes[] = 'btn-block';
+        }
+        $contents .= '<p><a class="'.implode(' ', $btn_classes).'" href="'.$options['link_url'].'">'.$options['link_text'].'</a></p>';
+    }
+    if(!strlen($contents)){
+        return;
+    }
+
+    $alert_classes = array('alert');
+    $alert_dismiss_btn = '';
+    if($options['dismiss_btn']){
+        $alert_classes = array_merge($alert_classes, array('alert-dismissible', 'fade', 'show'));
+        $alert_dismiss_btn = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+    }
+    if($options['colour']){
+        $alert_classes[] = $options['colour'];
+    } else {
+        $alert_classes[] = 'alert-primary';
+    }
+
+    $alert = '<div class="'.implode(' ', $alert_classes).'">';
+    $alert .= $alert_dismiss_btn;
+    $alert .= $contents;
+    $alert .= '</div>';
+    return $alert.'<pre>'.print_r($options, true).'</pre>';
+}
+add_shortcode('bootstrap-banner', 'bootstrap_banner_shortcode');
