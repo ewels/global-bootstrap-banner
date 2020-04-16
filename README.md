@@ -1,6 +1,11 @@
 # Bootstrap Banner
 
+> **WordPress Plugin:** Add a global website banner using a Bootstrap alert box.
+
+
 A WordPress Customise Widget to add a global website banner, styled using a [Bootstrap alert box](https://getbootstrap.com/docs/4.4/components/alerts/).
+
+![banner-img](assets/banner-1544x500.png)
 
 The plugin assumes that you're already using Bootstrap, so you need to load the Bootstrap javascript and CSS separately.
 
@@ -103,13 +108,18 @@ If you would like to contribute to this plugin, please go to the [GitHub reposit
 3. Open the Customizer (Appearance > Customize, or Customize in the admin bar)
 4. Click "Banner Message" and add some content
 
-## Screenshots ==
+## Screenshots
 
-1. Customizer interface showing an alert with most of the default settings
-2. Alert with minimal input and no dismiss button
-3. Example using custom classes and tweaks to the output style
+Customizer interface showing an alert with most of the default settings.
+![screenshot-1](assets/screenshot-1.png)
 
-## Changelog ==
+Alert with minimal input and no dismiss button.
+![screenshot-2](assets/screenshot-2.png)
+
+Example using custom classes and tweaks to the output style.
+![screenshot-3](assets/screenshot-3.png)
+
+## Changelog
 
 ### 1.0
 
