@@ -3,7 +3,7 @@
 Plugin Name: Bootstrap Banner
 Plugin URI: http://www.github.com/ewels/bootstrap-banner/
 Description: A Wordpress Customiser Widget to add a global website banner, styled using a Bootstrap Alert.
-Version: 1.0dev
+Version: 1.0
 Author: Phil Ewels
 Author URI: http://phil.ewels.co.uk
 Text Domain: bootstrap-banner
