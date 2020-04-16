@@ -20,7 +20,70 @@ The plugin assumes that you're already using Bootstrap, so you need to load the 
 * [Bootstrap CDN](http://www.bootstrapcdn.com/) _(directly link CSS and javascript files)_
 * [Bootstrap Alerts in action](https://getbootstrap.com/docs/4.4/components/alerts/)
 
-If you'd like to contribute to this plugin, you can find it [hosted on GitHub](https://github.com/ewels/boostrap-banner).
+Once installed, you can add the alert to the correct location in your theme (for example, in `header.php` with the following function:
+
+```
+echo bootstrap_banner();
+```
+
+If you prefer, you can use a shortcode instead:
+
+```
+[bootstrap-banner]
+```
+
+= Shortcode Options =
+The plugin works best when using the Customizer interface. However, if you wish you can use a shortcode and override most fields.
+
+* `enabled` _(default `true`)_
+    * Whether to show the banner or not.
+* `colour` _(default `alert-primary`)_
+    * Bootstrap class to use for styling the alert.
+* `header_text`
+    * Header - leave blank to skip the alert header.
+* `body_text`
+    * Main text for the alert. You can use HTML.
+* `link_text`
+    * Display text for a button at the bottom of the alert. Leave blank to skip.
+* `link_url`
+    * URL for button to link to.
+* `link_class` _(default `btn-primary`)_
+    * Bootstrap class to use for styling the button.
+* `link_new_window` _(default `false`)_
+    * Whether to open the link in a new window or not.
+* `link_btn_lg` _(default `false`)_
+    * Use the `btn-lg` class for the button (big button).
+* `link_btn_sm` _(default `false`)_
+    * Use the `btn-sm` class for the button (small button).
+* `link_btn_block` _(default `false`)_
+    * Use the `btn-block` class for the button (full width button).
+* `dismiss_btn` _(default `true`)_
+    * Whether to show a dismiss button in the corner of the alert.
+* `dismiss_expiry` _(default `14`)_
+    * How many days the dismissal cookie should last for before it is shown again.
+* `dismiss_id`
+    * Random string to use for the dismissal cookie. Use a new one to force it to show for everyone.
+* `alert_before` _(default `<div class="bootstrap-banner container">`)_
+    * HTML to use before the alert.
+* `alert_after` _(default `</div>`)_
+    * HTML to use after the alert.
+* `header_before` _(default `<h4 class="bootstrap-banner-heading alert-heading">`)_
+    * HTML to use before the heading.
+* `header_after` _(default `</h4>`)_
+    * HTML to use after the heading.
+* `link_before` _(default `<p class="bootstrap-banner-btn-p mb-0">`)_
+    * HTML to use before the button.
+* `link_after` _(default `</p>`)_
+    * HTML to use after the button.
+
+For example, a simple shortcode usage would be:
+
+```
+[bootstrap-banner body_text="This alert says something different"]
+```
+
+Note that the shortcode first takes the settings from the Customizer and then overwrites these.
+So the above shortcode would show a header if it is set in the Customizer settings.
 
 = Credits =
 
@@ -32,30 +95,34 @@ If you would like to contribute to this plugin, please go to the [GitHub reposit
 
 == Installation ==
 
-= The easy way: =
+= The easy way =
 
 1. Go to the Plugins Menu in WordPress
-1. Search for "Boostrap Banner"
-1. Click 'Install'
-1. Activate the plugin
+2. Search for "Boostrap Banner"
+3. Click 'Install'
+4. Activate the plugin
 
 = Manual Installation =
 
 1. Download the plugin file from this page and unzip the contents
-1. Upload the `bootstrap-banner` folder to the `/wp-content/plugins/` directory
-1. Activate the `bootstrap-banner` plugin through the 'Plugins' menu in WordPress
+2. Upload the `bootstrap-banner` folder to the `/wp-content/plugins/` directory
+3. Activate the `bootstrap-banner` plugin through the 'Plugins' menu in WordPress
 
 = Once Activated =
 
 1. Make sure that your theme is loading [Bootstrap](http://www.getbootstrap.com) CSS and Carousel javascript
+2. Add `echo bootstrap_banner();` to your theme or use the [bootstrap-banner] shortcode
+3. Open the Customizer (Appearance > Customize, or Customize in the admin bar)
+4. Click "Banner Message" and add some content
 
 == Screenshots ==
 
-1. Admin list interface showing Carousel images and titles.
-2. Admin image interface showing optional title and caption (Excerpt) fields, along with Category, order, image and URL
-3. Example output. Requires Bootstrap CSS and Javascript to be loaded (see documentation).
+1. Customizer interface showing an alert with most of the default settings
+2. Alert with minimal input and no dismiss button
+3. Example using custom classes and tweaks to the output style
 
 == Changelog ==
 
 = 1.0 =
+
 * Initial release.

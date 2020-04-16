@@ -20,12 +20,22 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
         public $type = 'button';
         public function render_content() {
             ?>
-            <label>
-                <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-                <span class="description customize-control-description"><?php echo esc_html( $this->description ); ?></span>
-                <button type="button" class="button" id="_customize-bootstrap-banner-regen-btn" onclick="document.getElementById('_customize-input-<?php echo esc_attr($this->id); ?>').value = '<?php echo wp_generate_password(12, false); ?>'; this.classList.add('disabled'); this.classList.add('button-primary');">Refresh Dismissal ID</button>
-                <input type="hidden" name="_customize-input-<?php echo esc_attr($this->id); ?>" id="_customize-input-<?php echo esc_attr($this->id); ?>" <?php $this->link(); ?>>
-            </label>
+            <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+            <span class="description customize-control-description"><?php echo esc_html( $this->description ); ?></span>
+            <button type="button" class="button-primary" onclick="bootstrap_banner_regen_cookie_id();"><?php _e('Refresh Dismissal ID'); ?></button>
+            <code id="_customize-bootstrap-banner-regen-preview"><?php echo esc_attr($this->value()); ?></code>
+            <input type="hidden" name="_customize-input-<?php echo esc_attr($this->id); ?>" id="_customize-bootstrap-banner-regen-input" <?php $this->link(); ?>>
+            <script type="text/javascript">
+            function bootstrap_banner_regen_cookie_id(){
+                var new_id = '';
+                var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                for (var i = 0; i < 12; i++){
+                    new_id += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                jQuery('#_customize-input-bootstrap_banner[alert_before]').val(new_id);
+                jQuery('#_customize-bootstrap-banner-regen-input').trigger('change');
+            }
+            </script>
             <?php
         }
     }
@@ -49,7 +59,10 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
     ) );
 
     // Alert class
-    $wp_customize->add_setting('bootstrap_banner[colour]', array('type' => 'option'));
+    $wp_customize->add_setting('bootstrap_banner[colour]', array(
+        'type' => 'option',
+        'default' => 'alert-primary'
+    ));
     $wp_customize->add_control('bootstrap_banner[colour]', array(
         'type' => 'select',
         'label' => 'Alert Colour',
@@ -169,7 +182,7 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('bootstrap_banner[dismiss_expiry]', array(
         'type' => 'number',
         'label' => __('Dismissal expiration'),
-        'description' => __('Number of days that the dismissal cookie lasts for. Use -1 for "forever"'),
+        'description' => __('Number of days that the dismissal cookie lasts for.'),
         'section' => 'bootstrap_banner'
     ) );
 
@@ -186,10 +199,7 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
     ) );
 
     // Regenerate dismissal ID
-    $wp_customize->add_setting('bootstrap_banner[dismiss_id]', array(
-        'type' => 'option',
-        'default' => wp_generate_password(12, false)
-    ));
+    $wp_customize->add_setting('bootstrap_banner[dismiss_id]', array('type' => 'option'));
     $wp_customize->add_control(
         new WP_Bootstrap_Banner_Dismiss_ID_Control(
             $wp_customize,
@@ -202,6 +212,75 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
         )
     );
 
+    // Alert - before
+    $wp_customize->add_setting('bootstrap_banner[alert_before]', array(
+        'type' => 'option',
+        'default' => '<div class="bootstrap-banner container">'
+    ));
+    $wp_customize->add_control('bootstrap_banner[alert_before]', array(
+        'type' => 'text',
+        'label' => __('Before header'),
+        'description' => __('HTML to prefix the alert with'),
+        'section' => 'bootstrap_banner'
+    ) );
+    // Alert - after
+    $wp_customize->add_setting('bootstrap_banner[alert_after]', array(
+        'type' => 'option',
+        'default' => '</div>'
+    ));
+    $wp_customize->add_control('bootstrap_banner[alert_after]', array(
+        'type' => 'text',
+        'label' => __('After header'),
+        'description' => __('HTML to suffix the alert with'),
+        'section' => 'bootstrap_banner'
+    ) );
+
+    // Header - before
+    $wp_customize->add_setting('bootstrap_banner[header_before]', array(
+        'type' => 'option',
+        'default' => '<h4 class="bootstrap-banner-heading alert-heading">'
+    ));
+    $wp_customize->add_control('bootstrap_banner[header_before]', array(
+        'type' => 'text',
+        'label' => __('Before header'),
+        'description' => __('HTML to prefix header with'),
+        'section' => 'bootstrap_banner'
+    ) );
+    // Header - after
+    $wp_customize->add_setting('bootstrap_banner[header_after]', array(
+        'type' => 'option',
+        'default' => '</h4>'
+    ));
+    $wp_customize->add_control('bootstrap_banner[header_after]', array(
+        'type' => 'text',
+        'label' => __('After header'),
+        'description' => __('HTML to suffix header with'),
+        'section' => 'bootstrap_banner'
+    ) );
+
+    // Link - before
+    $wp_customize->add_setting('bootstrap_banner[link_before]', array(
+        'type' => 'option',
+        'default' => '<p class="bootstrap-banner-btn-p mb-0">'
+    ));
+    $wp_customize->add_control('bootstrap_banner[link_before]', array(
+        'type' => 'text',
+        'label' => __('Before link'),
+        'description' => __('HTML to prefix the link with'),
+        'section' => 'bootstrap_banner'
+    ) );
+    // Link - after
+    $wp_customize->add_setting('bootstrap_banner[link_after]', array(
+        'type' => 'option',
+        'default' => '</p>'
+    ));
+    $wp_customize->add_control('bootstrap_banner[link_after]', array(
+        'type' => 'text',
+        'label' => __('After link'),
+        'description' => __('HTML to suffix the link with'),
+        'section' => 'bootstrap_banner'
+    ) );
+
 }
 add_action('customize_register', 'bootstrap_banner_theme_customizer');
 
@@ -209,60 +288,129 @@ add_action('customize_register', 'bootstrap_banner_theme_customizer');
 
 
 //
-// Banner shortcode
+// Banner output
 //
 
 // Shortcode
-function bootstrap_banner_shortcode($atts_raw) {
-    $options = get_option('bootstrap_banner');
-    if(!$options || !$options['enabled']){
+function bootstrap_banner($atts_raw=array()) {
+    // All possible keys with default values
+    $defaults = array(
+        'enabled' => true,
+        'colour' => 'alert-primary',
+        'header_text' => '',
+        'body_text' => '',
+        'link_text' => '',
+        'link_url' => '',
+        'link_class' => 'btn-primary',
+        'link_new_window' => false,
+        'link_btn_lg' => false,
+        'link_btn_sm' => false,
+        'link_btn_block' => false,
+        'dismiss_btn' => true,
+        'dismiss_expiry' => '14',
+        'dismiss_id' => '',
+        'alert_before' => '<div class="bootstrap-banner container">',
+        'alert_after' => '</div>',
+        'header_before' => '<h4 class="bootstrap-banner-heading alert-heading">',
+        'header_after' => '</h4>',
+        'link_before' => '<p class="bootstrap-banner-btn-p mb-0">',
+        'link_after' => '</p>'
+    );
+
+    // Merge defaults with settings from the Customizer
+    $options = shortcode_atts($defaults, get_option('bootstrap_banner'));
+
+    // Merge settings with anything supplied from the shortcode / function call
+    $options = shortcode_atts($options, $atts_raw);
+
+    // Return if banner is disabled
+    if(!$options['enabled']){
         return;
     }
+
+    // Return if we have a dismissal cookie
+    if(isset($_COOKIE['bootstrap_banner_dismiss_id']) && $_COOKIE['bootstrap_banner_dismiss_id'] == $options['dismiss_id']) {
+        return;
+    }
+
+    // Trim whitespace from everything (being paranoid)
+    $trim_keys = array(
+        'header_text',
+        'body_text',
+        'link_text',
+        'link_url',
+        'dismiss_id',
+        'dismiss_expiry',
+        'alert_before',
+        'alert_after',
+        'header_before',
+        'header_after',
+        'link_before',
+        'link_after'
+    );
+    foreach($trim_keys as $key){
+        $options[$key] = trim($options[$key]);
+    }
+
+    // Check that we have a dismissal ID - generate one and save if not
+    if(!strlen($options['dismiss_id'])){
+        $options['dismiss_id'] = wp_generate_password(12, false);
+        update_option('bootstrap_banner', $options);
+    }
+
+    // Generate the contents of the alert
     $contents = '';
-    if($options['header_text'] && trim($options['header_text'])){
-        $contents .= '<h4 class="alert-heading">'.trim($options['header_text']).'</h4>';
+    if(strlen($options['header_text'])){
+        $contents .= $options['header_before'].$options['header_text'].$options['header_after'];
     }
-    if($options['body_text'] && trim($options['body_text'])){
-        $contents .= trim($options['body_text']);
+    if(strlen($options['body_text'])){
+        $contents .= '<div class="bootstrap-banner-body">'.$options['body_text'].'</div>';
     }
-    if($options['link_text'] && trim($options['link_text']) && $options['link_url'] && trim($options['link_url'])){
-        $btn_classes = array('btn', 'mt-2');
-        if($options['link_class']){
-            $btn_classes[] = $options['link_class'];
-        } else {
-            $btn_classes[] = 'btn-primary';
-        }
-        if($options['link_btn_lg']){
-            $btn_classes[] = 'btn-lg';
-        }
-        if($options['link_btn_sm']){
-            $btn_classes[] = 'btn-sm';
-        }
-        if($options['link_btn_block']){
-            $btn_classes[] = 'btn-block';
-        }
-        $contents .= '<p><a class="'.implode(' ', $btn_classes).'" href="'.$options['link_url'].'">'.$options['link_text'].'</a></p>';
+    if(strlen($options['link_text']) && strlen($options['link_url'])){
+        $btn_classes = array('bootstrap-banner-btn', 'btn', 'mt-2');
+        $btn_classes[] = $options['link_class'];
+        if($options['link_btn_lg']) $btn_classes[] = 'btn-lg';
+        if($options['link_btn_sm']) $btn_classes[] = 'btn-sm';
+        if($options['link_btn_block']) $btn_classes[] = 'btn-block';
+        $target = '';
+        if($options['link_new_window']) $target = 'target="_blank"';
+        $contents .= $options['link_before'].'<a class="'.implode(' ', $btn_classes).'" href="'.$options['link_url'].'" '.$target.'>'.$options['link_text'].'</a>'.$options['link_after'];
     }
+    // Return if banner has no contents
     if(!strlen($contents)){
         return;
     }
 
-    $alert_classes = array('alert');
+    // Build the alert
+    $alert_classes = array('bootstrap-banner-alert', 'mt-3', 'alert', $options['colour']);
     $alert_dismiss_btn = '';
     if($options['dismiss_btn']){
         $alert_classes = array_merge($alert_classes, array('alert-dismissible', 'fade', 'show'));
-        $alert_dismiss_btn = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        $alert_dismiss_btn = '<button type="button" class="bootstrap-banner-close close" data-dismiss="alert" data-dismiss-id="'.$options['dismiss_id'].'" data-dismiss-expiry="'.$options['dismiss_expiry'].'" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
     }
-    if($options['colour']){
-        $alert_classes[] = $options['colour'];
-    } else {
-        $alert_classes[] = 'alert-primary';
-    }
+    $alert = $options['alert_before'].'<div class="'.implode(' ', $alert_classes).'">'.$alert_dismiss_btn.$contents.'</div>'.$options['alert_after'];
 
-    $alert = '<div class="'.implode(' ', $alert_classes).'">';
-    $alert .= $alert_dismiss_btn;
-    $alert .= $contents;
-    $alert .= '</div>';
-    return $alert.'<pre>'.print_r($options, true).'</pre>';
+    // Build the JavaScript
+    ob_start(); ?>
+    <script type="text/javascript">
+    var close_btn = document.getElementsByClassName('bootstrap-banner-close');
+    var bootstrap_banner_close = function() {
+        var dismiss_id = this.getAttribute("data-dismiss-id");
+        var dismiss_expiry = this.getAttribute("data-dismiss-expiry");
+        var dismiss_date = new Date();
+        dismiss_date.setDate(dismiss_date.getDate() + parseInt(dismiss_expiry));
+        console.log(dismiss_date, dismiss_date.toUTCString());
+        document.cookie = 'bootstrap_banner_dismiss_id='+dismiss_id+'; expires='+dismiss_date.toUTCString()+'; path=/';
+    };
+    for (var i = 0; i < close_btn.length; i++) {
+        close_btn[i].addEventListener('click', bootstrap_banner_close, false);
+    }
+    </script>
+    <?php
+    $js = ob_get_contents();
+    ob_end_clean();
+
+    // Return the output
+    return $alert.$js;
 }
-add_shortcode('bootstrap-banner', 'bootstrap_banner_shortcode');
+add_shortcode('bootstrap-banner', 'bootstrap_banner');
