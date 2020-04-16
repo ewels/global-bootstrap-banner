@@ -21,10 +21,13 @@ The plugin assumes that you're already using Bootstrap, so you need to load the 
 * [Bootstrap CDN](http://www.bootstrapcdn.com/) _(directly link CSS and javascript files)_
 * [Bootstrap Alerts in action](https://getbootstrap.com/docs/4.4/components/alerts/)
 
-Once installed, you can add the alert to the correct location in your theme (for example, in `header.php` with the following function:
+Once installed, you can add the alert to the correct location in your theme (for example, in `header.php` with the `bootstrap_banner()` function.
+For example:
 
 ```
-echo bootstrap_banner();
+if (function_exists('bootstrap_banner')){
+    echo bootstrap_banner();
+}
 ```
 
 If you prefer, you can use a shortcode instead:
