@@ -10,6 +10,9 @@ Text Domain: bootstrap-banner
 License: GPLv2
 */
 
+// Prevent direct access to the plugin
+if(!defined('ABSPATH')) exit('Direct access to plugin file not allowed.');
+
 //
 // Theme customiser
 //
