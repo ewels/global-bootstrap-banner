@@ -32,8 +32,8 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
                 for (var i = 0; i < 12; i++){
                     new_id += characters.charAt(Math.floor(Math.random() * characters.length));
                 }
-                jQuery('#_customize-input-bootstrap_banner[alert_before]').val(new_id);
-                jQuery('#_customize-bootstrap-banner-regen-input').trigger('change');
+                jQuery('#_customize-bootstrap-banner-regen-preview').html(new_id);
+                jQuery('#_customize-bootstrap-banner-regen-input').val(new_id).trigger('change');
             }
             </script>
             <?php
