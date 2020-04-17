@@ -1,7 +1,19 @@
 # Bootstrap Banner
+<!--
+Contributors: tallphil
+Donate Link: http://www.phil.ewels.co.uk/
+Tags: banner, alert, bootstrap
+Requires at least: 5.0
+Tested up to: 5.4
+Requires PHP: 5.2.4
+Stable tag: 1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+-->
 
-> **WordPress Plugin:** Add a global website banner using a Bootstrap alert box.
+Add a global website banner using a Bootstrap alert box.
 
+## Description
 
 A WordPress Customise Widget to add a global website banner, styled using a [Bootstrap alert box](https://getbootstrap.com/docs/4.4/components/alerts/).
 
@@ -28,7 +40,7 @@ If you prefer, you can use a shortcode instead:
 [bootstrap-banner]
 ```
 
-## Shortcode Options
+### Shortcode Options
 The plugin works best when using the Customizer interface. However, if you wish you can use a shortcode and override most fields.
 
 * `enabled` _(default `true`)_
@@ -81,11 +93,11 @@ For example, a simple shortcode usage would be:
 Note that the shortcode first takes the settings from the Customizer and then overwrites these.
 So the above shortcode would show a header if it is set in the Customizer settings.
 
-## Credits
+### Credits
 
 This plugin was written by [@ewels](https://github.com/ewels).
 
-## Contributing
+### Contributing
 
 If you would like to contribute to this plugin, please go to the [GitHub repository](https://github.com/ewels/bootstrap-banner) and make a personal fork of the development version. You can then make your changes and submit a pull request. I will happily review the code and then merge when we're both happy.
 
@@ -113,14 +125,9 @@ If you would like to contribute to this plugin, please go to the [GitHub reposit
 
 ## Screenshots
 
-Customizer interface showing an alert with most of the default settings.
-![screenshot-1](.wordpress-org/screenshot-1.png)
-
-Alert with minimal input and no dismiss button.
-![screenshot-2](.wordpress-org/screenshot-2.png)
-
-Example using custom classes and tweaks to the output style.
-![screenshot-3](.wordpress-org/screenshot-3.png)
+1. Customizer interface showing an alert with most of the default settings. ![screenshot-1](.wordpress-org/screenshot-1.png)
+2. Alert with minimal input and no dismiss button. ![screenshot-2](.wordpress-org/screenshot-2.png)
+3. Example using custom classes and tweaks to the output style. ![screenshot-3](.wordpress-org/screenshot-3.png)
 
 ## Changelog
 

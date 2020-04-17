@@ -91,7 +91,7 @@ So the above shortcode would show a header if it is set in the Customizer settin
 
 = Credits =
 
-This plugin was written by @tallphil.
+This plugin was written by [@ewels](https://github.com/ewels).
 
 = Contributing =
 
@@ -121,9 +121,9 @@ If you would like to contribute to this plugin, please go to the [GitHub reposit
 
 == Screenshots ==
 
-1. Customizer interface showing an alert with most of the default settings
-2. Alert with minimal input and no dismiss button
-3. Example using custom classes and tweaks to the output style
+1. Customizer interface showing an alert with most of the default settings.
+2. Alert with minimal input and no dismiss button.
+3. Example using custom classes and tweaks to the output style.
 
 == Changelog ==
 
