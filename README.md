@@ -5,7 +5,7 @@
 
 A WordPress Customise Widget to add a global website banner, styled using a [Bootstrap alert box](https://getbootstrap.com/docs/4.4/components/alerts/).
 
-![banner-img](assets/banner-1544x500.png)
+![banner-img](.wordpress-org/banner-1544x500.png)
 
 The plugin assumes that you're already using Bootstrap, so you need to load the Bootstrap javascript and CSS separately.
 
@@ -114,13 +114,13 @@ If you would like to contribute to this plugin, please go to the [GitHub reposit
 ## Screenshots
 
 Customizer interface showing an alert with most of the default settings.
-![screenshot-1](assets/screenshot-1.png)
+![screenshot-1](.wordpress-org/screenshot-1.png)
 
 Alert with minimal input and no dismiss button.
-![screenshot-2](assets/screenshot-2.png)
+![screenshot-2](.wordpress-org/screenshot-2.png)
 
 Example using custom classes and tweaks to the output style.
-![screenshot-3](assets/screenshot-3.png)
+![screenshot-3](.wordpress-org/screenshot-3.png)
 
 ## Changelog
 
