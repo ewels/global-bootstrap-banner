@@ -11,9 +11,9 @@ with open(sys.argv[1], 'r') as fh:
     wp_readme = fh.read()
 
 # Convert headers
-wp_readme = re.sub(r"###(.*)\n", r"=\1 =\n", wp_readme)
-wp_readme = re.sub(r"##(.*)\n", r"==\1 ==\n", wp_readme)
-wp_readme = re.sub(r"#(.*)\n", r"===\1 ===\n", wp_readme)
+wp_readme = re.sub(re.compile(r"^###(.*)$", re.MULTILINE), r"=\1 =", wp_readme)
+wp_readme = re.sub(re.compile(r"^##(.*)$", re.MULTILINE), r"==\1 ==", wp_readme)
+wp_readme = re.sub(re.compile(r"^#(.*)$", re.MULTILINE), r"===\1 ===", wp_readme)
 
 # Remove images
 wp_readme = re.sub(r'!\[.*\]\(.*\)', '', wp_readme)
@@ -33,3 +33,5 @@ wp_readme = re.sub(r" +\n", "\n", wp_readme)
 
 with open('readme.txt', 'w') as fh:
     fh.write(wp_readme)
+
+print("Finished! Wordpress readme ended up looking like this:\n\n\n\n{}".format(wp_readme))
