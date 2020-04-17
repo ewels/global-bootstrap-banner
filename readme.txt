@@ -24,17 +24,17 @@ The plugin assumes that you're already using Bootstrap, so you need to load the 
 Once installed, you can add the alert to the correct location in your theme (for example, in `header.php` with the `bootstrap_banner()` function.
 For example:
 
-```
+`
 if (function_exists('bootstrap_banner')){
     echo bootstrap_banner();
 }
-```
+`
 
 If you prefer, you can use a shortcode instead:
 
-```
+`
 [bootstrap-banner]
-```
+`
 
 = Shortcode Options =
 The plugin works best when using the Customizer interface. However, if you wish you can use a shortcode and override most fields.
@@ -82,9 +82,9 @@ The plugin works best when using the Customizer interface. However, if you wish 
 
 For example, a simple shortcode usage would be:
 
-```
+`
 [bootstrap-banner body_text="This alert says something different"]
-```
+`
 
 Note that the shortcode first takes the settings from the Customizer and then overwrites these.
 So the above shortcode would show a header if it is set in the Customizer settings.
