@@ -69,6 +69,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[colour]', array(
         'type' => 'select',
         'label' => 'Alert Colour',
+        'description' =>  __('Bootstrap class for alert. Default: Primary.'),
         'choices' => array(
             'alert-primary' => 'Primary (blue)',
             'alert-danger' => 'Danger (red)',
@@ -85,7 +86,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[header_text]', array(
         'type' => 'text',
         'label' => __('Header text'),
-        'description' => __('Header for the alert (optional).'),
+        'description' => __('Header for the alert.'),
         'section' => 'global_bootstrap_banner',
     ) );
 
@@ -103,7 +104,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[link_text]', array(
         'type' => 'text',
         'label' => __('Button Text'),
-        'description' => __('Text for a button at the bottom of the alert (optional)'),
+        'description' => __('Text for a button at the bottom of the alert.'),
         'section' => 'global_bootstrap_banner'
     ) );
 
@@ -112,7 +113,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[link_url]', array(
         'type' => 'text',
         'label' => __('Button URL'),
-        'description' => __('URL for a button at the bottom of the alert (optional)'),
+        'description' => __('URL for a button at the bottom of the alert.'),
         'input_attrs' => array( 'placeholder' => get_site_url() ),
         'section' => 'global_bootstrap_banner'
     ) );
@@ -122,7 +123,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[link_new_window]', array(
         'type' => 'checkbox',
         'label' => __('Open link in new window'),
-        'description' => __('Select to make the button open the link in a new window'),
+        'description' => __('Select to make the button open the link in a new window.'),
         'section' => 'global_bootstrap_banner'
     ) );
 
@@ -134,7 +135,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[link_class]', array(
         'type' => 'select',
         'label' => __('Button style'),
-        'description' => __('Bootstrap class for button colour'),
+        'description' => __('Bootstrap class for button colour. Default: Primary (blue).'),
         'choices' => array(
             'btn-primary' => 'Primary (blue)',
             'btn-danger' => 'Danger (red)',
@@ -185,7 +186,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[dismiss_expiry]', array(
         'type' => 'number',
         'label' => __('Dismissal expiration'),
-        'description' => __('Number of days that the dismissal cookie lasts for.'),
+        'description' => __('Number of days that the dismissal cookie lasts for. Default: 14.'),
         'section' => 'global_bootstrap_banner'
     ) );
 
@@ -223,7 +224,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[alert_before]', array(
         'type' => 'text',
         'label' => __('Before header'),
-        'description' => __('HTML to prefix the alert with'),
+        'description' => __('HTML to prefix the alert with.<br>Default: <code>&lt;div class=&quot;global-bootstrap-banner container&quot;&gt;</code>'),
         'section' => 'global_bootstrap_banner'
     ) );
     // Alert - after
@@ -234,7 +235,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[alert_after]', array(
         'type' => 'text',
         'label' => __('After header'),
-        'description' => __('HTML to suffix the alert with'),
+        'description' => __('HTML to suffix the alert with. Default: <code>&lt;/div&gt;</code>'),
         'section' => 'global_bootstrap_banner'
     ) );
 
@@ -246,7 +247,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[header_before]', array(
         'type' => 'text',
         'label' => __('Before header'),
-        'description' => __('HTML to prefix header with'),
+        'description' => __('HTML to prefix header with.<br>Default: <code>&lt;h4 class=&quot;global-bootstrap-banner-heading alert-heading&quot;&gt;</code>'),
         'section' => 'global_bootstrap_banner'
     ) );
     // Header - after
@@ -257,7 +258,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[header_after]', array(
         'type' => 'text',
         'label' => __('After header'),
-        'description' => __('HTML to suffix header with'),
+        'description' => __('HTML to suffix header with. Default: <code>&lt;/h4&gt;</code>'),
         'section' => 'global_bootstrap_banner'
     ) );
 
@@ -269,7 +270,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[link_before]', array(
         'type' => 'text',
         'label' => __('Before link'),
-        'description' => __('HTML to prefix the link with'),
+        'description' => __('HTML to prefix the link with.<br>Default: <code>&lt;p class=&quot;global-bootstrap-banner-btn-p mb-0&quot;&gt;</code>'),
         'section' => 'global_bootstrap_banner'
     ) );
     // Link - after
@@ -280,7 +281,7 @@ function global_bootstrap_banner_theme_customizer( $wp_customize ) {
     $wp_customize->add_control('global_bootstrap_banner[link_after]', array(
         'type' => 'text',
         'label' => __('After link'),
-        'description' => __('HTML to suffix the link with'),
+        'description' => __('HTML to suffix the link with. Default: <code>&lt;/p&gt;</code>'),
         'section' => 'global_bootstrap_banner'
     ) );
 
