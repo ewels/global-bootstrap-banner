@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Bootstrap Banner
-Plugin URI: http://www.github.com/ewels/bootstrap-banner/
+Plugin Name: Global Bootstrap Banner
+Plugin URI: http://www.github.com/ewels/global-bootstrap-banner/
 Description: A Wordpress Customiser Widget to add a global website banner, styled using a Bootstrap Alert.
 Version: 1.0
 Author: Phil Ewels
 Author URI: http://phil.ewels.co.uk
-Text Domain: bootstrap-banner
+Text Domain: global-bootstrap-banner
 License: GPLv2
 */
 
@@ -16,27 +16,27 @@ if(!defined('ABSPATH')) exit('Direct access to plugin file not allowed.');
 //
 // Theme customiser
 //
-function bootstrap_banner_theme_customizer( $wp_customize ) {
+function global_bootstrap_banner_theme_customizer( $wp_customize ) {
 
     // Regeneration button custom control
-    class WP_Bootstrap_Banner_Dismiss_ID_Control extends WP_Customize_Control {
+    class WP_Global_Bootstrap_Banner_Dismiss_ID_Control extends WP_Customize_Control {
         public $type = 'button';
         public function render_content() {
             ?>
             <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
             <span class="description customize-control-description"><?php echo esc_html( $this->description ); ?></span>
-            <button type="button" class="button-primary" onclick="bootstrap_banner_regen_cookie_id();"><?php _e('Refresh Dismissal ID'); ?></button>
-            <code id="_customize-bootstrap-banner-regen-preview"><?php echo esc_attr($this->value()); ?></code>
-            <input type="hidden" name="_customize-input-<?php echo esc_attr($this->id); ?>" id="_customize-bootstrap-banner-regen-input" <?php $this->link(); ?>>
+            <button type="button" class="button-primary" onclick="global_bootstrap_banner_regen_cookie_id();"><?php _e('Refresh Dismissal ID'); ?></button>
+            <code id="_customize-global-bootstrap-banner-regen-preview"><?php echo esc_attr($this->value()); ?></code>
+            <input type="hidden" name="_customize-input-<?php echo esc_attr($this->id); ?>" id="_customize-global-bootstrap-banner-regen-input" <?php $this->link(); ?>>
             <script type="text/javascript">
-            function bootstrap_banner_regen_cookie_id(){
+            function global_bootstrap_banner_regen_cookie_id(){
                 var new_id = '';
                 var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
                 for (var i = 0; i < 12; i++){
                     new_id += characters.charAt(Math.floor(Math.random() * characters.length));
                 }
-                jQuery('#_customize-bootstrap-banner-regen-preview').html(new_id);
-                jQuery('#_customize-bootstrap-banner-regen-input').val(new_id).trigger('change');
+                jQuery('#_customize-global-bootstrap-banner-regen-preview').html(new_id);
+                jQuery('#_customize-global-bootstrap-banner-regen-input').val(new_id).trigger('change');
             }
             </script>
             <?php
@@ -44,29 +44,29 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
     }
 
     // Customiser section
-    $wp_customize->add_section('bootstrap_banner', array(
+    $wp_customize->add_section('global_bootstrap_banner', array(
         'title' => __('Banner Message'),
         'description' => __('Show an alert box at the top of every page.'),
         'priority' => 32
     ) );
 
     // Enable / disable alert
-    $wp_customize->add_setting('bootstrap_banner[enabled]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[enabled]', array(
         'type' => 'option',
         'default' => true
     ));
-    $wp_customize->add_control('bootstrap_banner[enabled]', array(
+    $wp_customize->add_control('global_bootstrap_banner[enabled]', array(
         'type' => 'checkbox',
         'label' => __('Enable banner message'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Alert class
-    $wp_customize->add_setting('bootstrap_banner[colour]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[colour]', array(
         'type' => 'option',
         'default' => 'alert-primary'
     ));
-    $wp_customize->add_control('bootstrap_banner[colour]', array(
+    $wp_customize->add_control('global_bootstrap_banner[colour]', array(
         'type' => 'select',
         'label' => 'Alert Colour',
         'choices' => array(
@@ -77,61 +77,61 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
             'alert-info' => 'Info (turquoise)',
             'alert-secondary' => 'Secondary (grey)',
         ),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Header text
-    $wp_customize->add_setting('bootstrap_banner[header_text]', array('type' => 'option'));
-    $wp_customize->add_control('bootstrap_banner[header_text]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[header_text]', array('type' => 'option'));
+    $wp_customize->add_control('global_bootstrap_banner[header_text]', array(
         'type' => 'text',
         'label' => __('Header text'),
         'description' => __('Header for the alert (optional).'),
-        'section' => 'bootstrap_banner',
+        'section' => 'global_bootstrap_banner',
     ) );
 
     // Body text
-    $wp_customize->add_setting('bootstrap_banner[body_text]', array('type' => 'option'));
-    $wp_customize->add_control('bootstrap_banner[body_text]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[body_text]', array('type' => 'option'));
+    $wp_customize->add_control('global_bootstrap_banner[body_text]', array(
         'type' => 'textarea',
         'label' => __('Main Text'),
         'description' => __('Main body text for the alert. You can use HTML.'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Link text
-    $wp_customize->add_setting('bootstrap_banner[link_text]', array('type' => 'option'));
-    $wp_customize->add_control('bootstrap_banner[link_text]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[link_text]', array('type' => 'option'));
+    $wp_customize->add_control('global_bootstrap_banner[link_text]', array(
         'type' => 'text',
         'label' => __('Button Text'),
         'description' => __('Text for a button at the bottom of the alert (optional)'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Link URL
-    $wp_customize->add_setting('bootstrap_banner[link_url]', array('type' => 'option'));
-    $wp_customize->add_control('bootstrap_banner[link_url]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[link_url]', array('type' => 'option'));
+    $wp_customize->add_control('global_bootstrap_banner[link_url]', array(
         'type' => 'text',
         'label' => __('Button URL'),
         'description' => __('URL for a button at the bottom of the alert (optional)'),
         'input_attrs' => array( 'placeholder' => get_site_url() ),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Link open-in-new-window
-    $wp_customize->add_setting('bootstrap_banner[link_new_window]', array('type' => 'option'));
-    $wp_customize->add_control('bootstrap_banner[link_new_window]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[link_new_window]', array('type' => 'option'));
+    $wp_customize->add_control('global_bootstrap_banner[link_new_window]', array(
         'type' => 'checkbox',
         'label' => __('Open link in new window'),
         'description' => __('Select to make the button open the link in a new window'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Link button class
-    $wp_customize->add_setting('bootstrap_banner[link_class]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[link_class]', array(
         'type' => 'option',
         'default' => 'btn-primary'
     ));
-    $wp_customize->add_control('bootstrap_banner[link_class]', array(
+    $wp_customize->add_control('global_bootstrap_banner[link_class]', array(
         'type' => 'select',
         'label' => __('Button style'),
         'description' => __('Bootstrap class for button colour'),
@@ -154,138 +154,138 @@ function bootstrap_banner_theme_customizer( $wp_customize ) {
             'btn-outline-dark' => 'Outline - Dark (dark grey)',
             'btn-link' => 'Link (link-text)',
         ),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Button large / sm / block
-    $wp_customize->add_setting('bootstrap_banner[link_btn_lg]', array('type' => 'option'));
-    $wp_customize->add_control('bootstrap_banner[link_btn_lg]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[link_btn_lg]', array('type' => 'option'));
+    $wp_customize->add_control('global_bootstrap_banner[link_btn_lg]', array(
         'type' => 'checkbox',
         'label' => __('Large link button'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
-    $wp_customize->add_setting('bootstrap_banner[link_btn_sm]', array('type' => 'option'));
-    $wp_customize->add_control('bootstrap_banner[link_btn_sm]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[link_btn_sm]', array('type' => 'option'));
+    $wp_customize->add_control('global_bootstrap_banner[link_btn_sm]', array(
         'type' => 'checkbox',
         'label' => __('Small link button'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
-    $wp_customize->add_setting('bootstrap_banner[link_btn_block]', array('type' => 'option'));
-    $wp_customize->add_control('bootstrap_banner[link_btn_block]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[link_btn_block]', array('type' => 'option'));
+    $wp_customize->add_control('global_bootstrap_banner[link_btn_block]', array(
         'type' => 'checkbox',
         'label' => __('Block button'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Dismissal expiration
-    $wp_customize->add_setting('bootstrap_banner[dismiss_expiry]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[dismiss_expiry]', array(
         'type' => 'option',
         'default' => '14'
     ));
-    $wp_customize->add_control('bootstrap_banner[dismiss_expiry]', array(
+    $wp_customize->add_control('global_bootstrap_banner[dismiss_expiry]', array(
         'type' => 'number',
         'label' => __('Dismissal expiration'),
         'description' => __('Number of days that the dismissal cookie lasts for.'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Show dismiss button
-    $wp_customize->add_setting('bootstrap_banner[dismiss_btn]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[dismiss_btn]', array(
         'type' => 'option',
         'default' => true
     ));
-    $wp_customize->add_control('bootstrap_banner[dismiss_btn]', array(
+    $wp_customize->add_control('global_bootstrap_banner[dismiss_btn]', array(
         'type' => 'checkbox',
         'label' => __('Show dismiss button?'),
         'description' => __('Small x dismiss button in the top-right. Adds a cookie to remember preference.'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Regenerate dismissal ID
-    $wp_customize->add_setting('bootstrap_banner[dismiss_id]', array('type' => 'option'));
+    $wp_customize->add_setting('global_bootstrap_banner[dismiss_id]', array('type' => 'option'));
     $wp_customize->add_control(
-        new WP_Bootstrap_Banner_Dismiss_ID_Control(
+        new WP_Global_Bootstrap_Banner_Dismiss_ID_Control(
             $wp_customize,
-            'bootstrap_banner[dismiss_id]',
+            'global_bootstrap_banner[dismiss_id]',
             array(
                 'label' => __( 'Regenerate dismissal ID' ),
                 'description' => __('Click to set a new dismissal ID, so that alert is visible to all users immediately.'),
-                'section' => 'bootstrap_banner',
+                'section' => 'global_bootstrap_banner',
             )
         )
     );
 
     // Alert - before
-    $wp_customize->add_setting('bootstrap_banner[alert_before]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[alert_before]', array(
         'type' => 'option',
-        'default' => '<div class="bootstrap-banner container">'
+        'default' => '<div class="global-bootstrap-banner container">'
     ));
-    $wp_customize->add_control('bootstrap_banner[alert_before]', array(
+    $wp_customize->add_control('global_bootstrap_banner[alert_before]', array(
         'type' => 'text',
         'label' => __('Before header'),
         'description' => __('HTML to prefix the alert with'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
     // Alert - after
-    $wp_customize->add_setting('bootstrap_banner[alert_after]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[alert_after]', array(
         'type' => 'option',
         'default' => '</div>'
     ));
-    $wp_customize->add_control('bootstrap_banner[alert_after]', array(
+    $wp_customize->add_control('global_bootstrap_banner[alert_after]', array(
         'type' => 'text',
         'label' => __('After header'),
         'description' => __('HTML to suffix the alert with'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Header - before
-    $wp_customize->add_setting('bootstrap_banner[header_before]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[header_before]', array(
         'type' => 'option',
-        'default' => '<h4 class="bootstrap-banner-heading alert-heading">'
+        'default' => '<h4 class="global-bootstrap-banner-heading alert-heading">'
     ));
-    $wp_customize->add_control('bootstrap_banner[header_before]', array(
+    $wp_customize->add_control('global_bootstrap_banner[header_before]', array(
         'type' => 'text',
         'label' => __('Before header'),
         'description' => __('HTML to prefix header with'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
     // Header - after
-    $wp_customize->add_setting('bootstrap_banner[header_after]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[header_after]', array(
         'type' => 'option',
         'default' => '</h4>'
     ));
-    $wp_customize->add_control('bootstrap_banner[header_after]', array(
+    $wp_customize->add_control('global_bootstrap_banner[header_after]', array(
         'type' => 'text',
         'label' => __('After header'),
         'description' => __('HTML to suffix header with'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
     // Link - before
-    $wp_customize->add_setting('bootstrap_banner[link_before]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[link_before]', array(
         'type' => 'option',
-        'default' => '<p class="bootstrap-banner-btn-p mb-0">'
+        'default' => '<p class="global-bootstrap-banner-btn-p mb-0">'
     ));
-    $wp_customize->add_control('bootstrap_banner[link_before]', array(
+    $wp_customize->add_control('global_bootstrap_banner[link_before]', array(
         'type' => 'text',
         'label' => __('Before link'),
         'description' => __('HTML to prefix the link with'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
     // Link - after
-    $wp_customize->add_setting('bootstrap_banner[link_after]', array(
+    $wp_customize->add_setting('global_bootstrap_banner[link_after]', array(
         'type' => 'option',
         'default' => '</p>'
     ));
-    $wp_customize->add_control('bootstrap_banner[link_after]', array(
+    $wp_customize->add_control('global_bootstrap_banner[link_after]', array(
         'type' => 'text',
         'label' => __('After link'),
         'description' => __('HTML to suffix the link with'),
-        'section' => 'bootstrap_banner'
+        'section' => 'global_bootstrap_banner'
     ) );
 
 }
-add_action('customize_register', 'bootstrap_banner_theme_customizer');
+add_action('customize_register', 'global_bootstrap_banner_theme_customizer');
 
 
 
@@ -295,7 +295,7 @@ add_action('customize_register', 'bootstrap_banner_theme_customizer');
 //
 
 // Shortcode
-function bootstrap_banner($atts_raw=array()) {
+function global_bootstrap_banner($atts_raw=array()) {
     // All possible keys with default values
     $defaults = array(
         'enabled' => true,
@@ -312,16 +312,16 @@ function bootstrap_banner($atts_raw=array()) {
         'dismiss_btn' => true,
         'dismiss_expiry' => '14',
         'dismiss_id' => '',
-        'alert_before' => '<div class="bootstrap-banner container">',
+        'alert_before' => '<div class="global-bootstrap-banner container">',
         'alert_after' => '</div>',
-        'header_before' => '<h4 class="bootstrap-banner-heading alert-heading">',
+        'header_before' => '<h4 class="global-bootstrap-banner-heading alert-heading">',
         'header_after' => '</h4>',
-        'link_before' => '<p class="bootstrap-banner-btn-p mb-0">',
+        'link_before' => '<p class="global-bootstrap-banner-btn-p mb-0">',
         'link_after' => '</p>'
     );
 
     // Merge defaults with settings from the Customizer
-    $options = shortcode_atts($defaults, get_option('bootstrap_banner'));
+    $options = shortcode_atts($defaults, get_option('global_bootstrap_banner'));
 
     // Merge settings with anything supplied from the shortcode / function call
     $options = shortcode_atts($options, $atts_raw);
@@ -332,7 +332,7 @@ function bootstrap_banner($atts_raw=array()) {
     }
 
     // Return if we have a dismissal cookie
-    if(isset($_COOKIE['bootstrap_banner_dismiss_id']) && $_COOKIE['bootstrap_banner_dismiss_id'] == $options['dismiss_id']) {
+    if(isset($_COOKIE['global_bootstrap_banner_dismiss_id']) && $_COOKIE['global_bootstrap_banner_dismiss_id'] == $options['dismiss_id']) {
         return;
     }
 
@@ -358,7 +358,7 @@ function bootstrap_banner($atts_raw=array()) {
     // Check that we have a dismissal ID - generate one and save if not
     if(!strlen($options['dismiss_id'])){
         $options['dismiss_id'] = wp_generate_password(12, false);
-        update_option('bootstrap_banner', $options);
+        update_option('global_bootstrap_banner', $options);
     }
 
     // Generate the contents of the alert
@@ -367,10 +367,10 @@ function bootstrap_banner($atts_raw=array()) {
         $contents .= $options['header_before'].$options['header_text'].$options['header_after'];
     }
     if(strlen($options['body_text'])){
-        $contents .= '<div class="bootstrap-banner-body">'.$options['body_text'].'</div>';
+        $contents .= '<div class="global-bootstrap-banner-body">'.$options['body_text'].'</div>';
     }
     if(strlen($options['link_text']) && strlen($options['link_url'])){
-        $btn_classes = array('bootstrap-banner-btn', 'btn', 'mt-2');
+        $btn_classes = array('global-bootstrap-banner-btn', 'btn', 'mt-2');
         $btn_classes[] = $options['link_class'];
         if($options['link_btn_lg']) $btn_classes[] = 'btn-lg';
         if($options['link_btn_sm']) $btn_classes[] = 'btn-sm';
@@ -385,28 +385,28 @@ function bootstrap_banner($atts_raw=array()) {
     }
 
     // Build the alert
-    $alert_classes = array('bootstrap-banner-alert', 'mt-3', 'alert', $options['colour']);
+    $alert_classes = array('global-bootstrap-banner-alert', 'mt-3', 'alert', $options['colour']);
     $alert_dismiss_btn = '';
     if($options['dismiss_btn']){
         $alert_classes = array_merge($alert_classes, array('alert-dismissible', 'fade', 'show'));
-        $alert_dismiss_btn = '<button type="button" class="bootstrap-banner-close close" data-dismiss="alert" data-dismiss-id="'.$options['dismiss_id'].'" data-dismiss-expiry="'.$options['dismiss_expiry'].'" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        $alert_dismiss_btn = '<button type="button" class="global-bootstrap-banner-close close" data-dismiss="alert" data-dismiss-id="'.$options['dismiss_id'].'" data-dismiss-expiry="'.$options['dismiss_expiry'].'" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
     }
     $alert = $options['alert_before'].'<div class="'.implode(' ', $alert_classes).'">'.$alert_dismiss_btn.$contents.'</div>'.$options['alert_after'];
 
     // Build the JavaScript
     ob_start(); ?>
     <script type="text/javascript">
-    var close_btn = document.getElementsByClassName('bootstrap-banner-close');
-    var bootstrap_banner_close = function() {
+    var close_btn = document.getElementsByClassName('global-bootstrap-banner-close');
+    var global_bootstrap_banner_close = function() {
         var dismiss_id = this.getAttribute("data-dismiss-id");
         var dismiss_expiry = this.getAttribute("data-dismiss-expiry");
         var dismiss_date = new Date();
         dismiss_date.setDate(dismiss_date.getDate() + parseInt(dismiss_expiry));
         console.log(dismiss_date, dismiss_date.toUTCString());
-        document.cookie = 'bootstrap_banner_dismiss_id='+dismiss_id+'; expires='+dismiss_date.toUTCString()+'; path=/';
+        document.cookie = 'global_bootstrap_banner_dismiss_id='+dismiss_id+'; expires='+dismiss_date.toUTCString()+'; path=/';
     };
     for (var i = 0; i < close_btn.length; i++) {
-        close_btn[i].addEventListener('click', bootstrap_banner_close, false);
+        close_btn[i].addEventListener('click', global_bootstrap_banner_close, false);
     }
     </script>
     <?php
@@ -416,4 +416,4 @@ function bootstrap_banner($atts_raw=array()) {
     // Return the output
     return $alert.$js;
 }
-add_shortcode('bootstrap-banner', 'bootstrap_banner');
+add_shortcode('global-bootstrap-banner', 'global_bootstrap_banner');

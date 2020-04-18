@@ -1,4 +1,4 @@
-# Bootstrap Banner
+# Global Bootstrap Banner
 <!--
 Contributors: tallphil
 Donate Link: http://www.phil.ewels.co.uk/
@@ -25,19 +25,19 @@ The plugin assumes that you're already using Bootstrap, so you need to load the 
 * [Bootstrap CDN](http://www.bootstrapcdn.com/) _(directly link CSS and javascript files)_
 * [Bootstrap Alerts in action](https://getbootstrap.com/docs/4.4/components/alerts/)
 
-Once installed, you can add the alert to the correct location in your theme (for example, in `header.php` with the `bootstrap_banner()` function.
+Once installed, you can add the alert to the correct location in your theme (for example, in `header.php` with the `global_bootstrap_banner()` function.
 For example:
 
 ```php
-if (function_exists('bootstrap_banner')){
-    echo bootstrap_banner();
+if (function_exists('global_bootstrap_banner')){
+    echo global_bootstrap_banner();
 }
 ```
 
 If you prefer, you can use a shortcode instead:
 
 ```
-[bootstrap-banner]
+[global-bootstrap-banner]
 ```
 
 ### Shortcode Options
@@ -71,15 +71,15 @@ The plugin works best when using the Customizer interface. However, if you wish 
     * How many days the dismissal cookie should last for before it is shown again.
 * `dismiss_id`
     * Random string to use for the dismissal cookie. Use a new one to force it to show for everyone.
-* `alert_before` _(default `<div class="bootstrap-banner container">`)_
+* `alert_before` _(default `<div class="global-bootstrap-banner container">`)_
     * HTML to use before the alert.
 * `alert_after` _(default `</div>`)_
     * HTML to use after the alert.
-* `header_before` _(default `<h4 class="bootstrap-banner-heading alert-heading">`)_
+* `header_before` _(default `<h4 class="global-bootstrap-banner-heading alert-heading">`)_
     * HTML to use before the heading.
 * `header_after` _(default `</h4>`)_
     * HTML to use after the heading.
-* `link_before` _(default `<p class="bootstrap-banner-btn-p mb-0">`)_
+* `link_before` _(default `<p class="global-bootstrap-banner-btn-p mb-0">`)_
     * HTML to use before the button.
 * `link_after` _(default `</p>`)_
     * HTML to use after the button.
@@ -87,7 +87,7 @@ The plugin works best when using the Customizer interface. However, if you wish 
 For example, a simple shortcode usage would be:
 
 ```
-[bootstrap-banner body_text="This alert says something different"]
+[global-bootstrap-banner body_text="This alert says something different"]
 ```
 
 Note that the shortcode first takes the settings from the Customizer and then overwrites these.
@@ -99,7 +99,7 @@ This plugin was written by [@ewels](https://github.com/ewels).
 
 ### Contributing
 
-If you would like to contribute to this plugin, please go to the [GitHub repository](https://github.com/ewels/bootstrap-banner) and make a personal fork of the development version. You can then make your changes and submit a pull request. I will happily review the code and then merge when we're both happy.
+If you would like to contribute to this plugin, please go to the [GitHub repository](https://github.com/ewels/global-bootstrap-banner) and make a personal fork of the development version. You can then make your changes and submit a pull request. I will happily review the code and then merge when we're both happy.
 
 ## Installation
 
@@ -113,13 +113,13 @@ If you would like to contribute to this plugin, please go to the [GitHub reposit
 ### Manual Installation
 
 1. Download the plugin file from this page and unzip the contents
-2. Upload the `bootstrap-banner` folder to the `/wp-content/plugins/` directory
-3. Activate the `bootstrap-banner` plugin through the 'Plugins' menu in WordPress
+2. Upload the `global-bootstrap-banner` folder to the `/wp-content/plugins/` directory
+3. Activate the `global-bootstrap-banner` plugin through the 'Plugins' menu in WordPress
 
 ### Once Activated
 
 1. Make sure that your theme is loading [Bootstrap](http://www.getbootstrap.com) CSS and Carousel javascript
-2. Add `echo bootstrap_banner();` to your theme or use the [bootstrap-banner] shortcode
+2. Add `echo global_bootstrap_banner();` to your theme or use the [global-bootstrap-banner] shortcode
 3. Open the Customizer (Appearance > Customize, or Customize in the admin bar)
 4. Click "Banner Message" and add some content
 
